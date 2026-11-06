@@ -18,15 +18,17 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: edragon
+title: Mi blog
 email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Blog personal de edragon.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+  Un blog personal hecho con Jekyll y Tailwind CSS.
+# En GitHub Actions, url y baseurl se calculan automáticamente para GitHub Pages
+# (ver .github/workflows/pages.yml). Si publicas sin Actions, ajusta estos valores:
+# url: "https://tu-usuario.github.io"
+# baseurl: "/tu-repo"   # vacío si el repo es tu-usuario.github.io
+baseurl: ""
+url: ""
 lang: es
-twitter_username: edragon
-github_username:  edragon
 
 # Build settings
 plugins:
@@ -46,4 +48,6 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
+  - .github
+  - _config.pages.yml
   - vendor

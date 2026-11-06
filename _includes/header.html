@@ -15,8 +15,16 @@
   </div>
   {%- assign menu = site.pages | where: "path", "nav/menu.md" | first %}
   {%- if menu and menu.content and menu.content != empty %}
+  {%- assign menu_html = menu.content | markdownify %}
+  {%- comment -%}
+    Añade site.baseurl a los enlaces absolutos del menú (/ruta/) para que
+    funcionen en GitHub Pages de proyecto (usuario.github.io/repo/).
+  {%- endcomment -%}
+  {%- assign root_link = 'href="/' %}
+  {%- assign base_link = 'href="' | append: site.baseurl | append: '/' %}
+  {%- assign menu_html = menu_html | replace: root_link, base_link %}
   <nav class="site-nav mx-auto w-full max-w-6xl px-4 pb-6" aria-label="Principal">
-    {{ menu.content | markdownify }}
+    {{ menu_html }}
   </nav>
   {%- endif %}
 </header>
