@@ -1,0 +1,152 @@
+@import "tailwindcss" source(none);
+@import "./syntax-monokai-pro.css";
+
+/* Fuentes de contenido que Tailwind debe escanear (rutas relativas a este archivo).
+   Los globs incluyen .md y .markdown porque las fuentes por directorio no los toman. */
+@source "../_layouts";
+@source "../_includes";
+@source "../_posts/**/*.{html,md,markdown}";
+@source "../pages/**/*.{html,md,markdown}";
+@source "../nav/**/*.{html,md,markdown}";
+@source "../*.{html,md,markdown}";
+
+/* Dark mode por clase .dark en <html>, no por preferencia del sistema */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-ink: #212121;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  /* Menú superior: la lista markdown de nav/menu.md se convierte en fila */
+  .site-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .site-nav a {
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: inherit;
+    opacity: 0.7;
+    transition: opacity 0.15s ease;
+  }
+
+  .site-nav a:hover {
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  /* Contenido de posts y páginas (markdown de kramdown) */
+  .prose-content > :first-child {
+    margin-top: 0;
+  }
+
+  .prose-content h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .prose-content h3 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .prose-content p {
+    margin-bottom: 1.25rem;
+    line-height: 1.75;
+  }
+
+  .prose-content a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .prose-content ul,
+  .prose-content ol {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+    line-height: 1.75;
+  }
+
+  .prose-content ul {
+    list-style: disc;
+  }
+
+  .prose-content ol {
+    list-style: decimal;
+  }
+
+  .prose-content blockquote {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid currentColor;
+    opacity: 0.75;
+    font-style: italic;
+  }
+
+  .prose-content pre {
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    border-radius: 0.375rem;
+    background-color: color-mix(in srgb, currentColor 6%, transparent);
+    font-size: 0.875rem;
+  }
+
+  /* Bloques resaltados por Rouge: el tema Monokai Pro pone fondo y color */
+  .prose-content .highlight {
+    margin-bottom: 1.5rem;
+    border-radius: 0.375rem;
+    overflow: hidden;
+  }
+
+  .prose-content .highlight pre {
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+
+  .prose-content code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+    font-size: 0.875em;
+  }
+
+  .prose-content :not(pre) > code {
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    background-color: color-mix(in srgb, currentColor 8%, transparent);
+  }
+
+  .prose-content hr {
+    margin: 2.5rem 0;
+    border: 0;
+    border-top: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+  }
+}

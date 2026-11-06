@@ -1,0 +1,15 @@
+{%- if paginator.total_pages > 1 %}
+<nav class="mt-10 flex items-center justify-between text-sm" aria-label="Paginación">
+  <div>
+    {%- if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | relative_url }}" class="text-inherit no-underline opacity-70 transition hover:opacity-100">&larr; Más recientes</a>
+    {%- endif %}
+  </div>
+  <span class="opacity-50">Página {{ paginator.page }} de {{ paginator.total_pages }}</span>
+  <div>
+    {%- if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | relative_url }}" class="text-inherit no-underline opacity-70 transition hover:opacity-100">Más antiguos &rarr;</a>
+    {%- endif %}
+  </div>
+</nav>
+{%- endif %}

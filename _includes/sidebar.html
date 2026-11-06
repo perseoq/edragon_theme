@@ -1,0 +1,15 @@
+{%- assign sidebar_pages = site.pages | where_exp: "p", "p.path contains 'pages/'" | where_exp: "p", "p.sidebar != false" | sort: "title" -%}
+{%- if sidebar_pages.size > 0 %}
+<aside class="w-full shrink-0 lg:w-64">
+  <div class="lg:sticky lg:top-8">
+    <h2 class="mb-3 text-xs font-semibold tracking-widest uppercase opacity-50">Páginas</h2>
+    <ul class="space-y-2 text-sm">
+      {%- for p in sidebar_pages %}
+      <li>
+        <a href="{{ p.url | relative_url }}" class="text-inherit no-underline opacity-70 transition hover:opacity-100">{{ p.title | default: p.name }}</a>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</aside>
+{%- endif %}

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'es' }}">
+<head>
+  {%- include head.html %}
+</head>
+<body class="flex min-h-screen flex-col bg-white text-ink dark:bg-ink dark:text-white">
+  {%- include header.html %}
+  <div class="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-10 px-4 py-10 lg:flex-row">
+    <main id="content" class="min-w-0 flex-1">
+      {{ content }}
+    </main>
+    {%- include sidebar.html %}
+  </div>
+  {%- include footer.html %}
+  <script src="{{ '/assets/js/theme.js' | relative_url }}" defer></script>
+</body>
+</html>

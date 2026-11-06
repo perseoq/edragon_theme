@@ -1,0 +1,156 @@
+/*
+ * Monokai Pro — tema de sintaxis (Rouge).
+ * Paleta oficial:
+ *   fondo #2D2A2E · texto #FCFCFA · comentario #727072
+ *   rojo #FF6188 · naranja #FC9867 · amarillo #FFD866
+ *   verde #A9DC76 · azul #78DCE8 · violeta #AB9DF2
+ */
+
+.highlight {
+  background-color: #2d2a2e;
+  color: #fcfcfa;
+}
+
+.highlight .c,
+.highlight .cm,
+.highlight .c1,
+.highlight .cs,
+.highlight .cp {
+  color: #727072;
+  font-style: italic;
+}
+
+.highlight .err {
+  color: #ff6188;
+}
+
+.highlight .k,
+.highlight .kd,
+.highlight .kn,
+.highlight .kp,
+.highlight .kr,
+.highlight .kt,
+.highlight .ow {
+  color: #ff6188;
+}
+
+.highlight .kc {
+  color: #ab9df2;
+}
+
+.highlight .o {
+  color: #ff6188;
+}
+
+.highlight .p {
+  color: #fcfcfa;
+}
+
+.highlight .n {
+  color: #fcfcfa;
+}
+
+.highlight .na {
+  color: #a9dc76;
+}
+
+.highlight .nb,
+.highlight .bp {
+  color: #78dce8;
+}
+
+.highlight .nc,
+.highlight .nn,
+.highlight .ne {
+  color: #78dce8;
+}
+
+.highlight .nd {
+  color: #a9dc76;
+}
+
+.highlight .nf,
+.highlight .fm {
+  color: #a9dc76;
+}
+
+.highlight .nl {
+  color: #fcfcfa;
+}
+
+.highlight .no {
+  color: #ab9df2;
+}
+
+.highlight .nt {
+  color: #ff6188;
+}
+
+.highlight .nv,
+.highlight .vc,
+.highlight .vg,
+.highlight .vi,
+.highlight .vm {
+  color: #fcfcfa;
+}
+
+.highlight .l,
+.highlight .ld,
+.highlight .s,
+.highlight .s1,
+.highlight .s2,
+.highlight .sb,
+.highlight .sc,
+.highlight .sd,
+.highlight .sh,
+.highlight .si,
+.highlight .sx,
+.highlight .sr {
+  color: #ffd866;
+}
+
+.highlight .se {
+  color: #ff6188;
+}
+
+.highlight .ss {
+  color: #78dce8;
+}
+
+.highlight .m,
+.highlight .mf,
+.highlight .mh,
+.highlight .mi,
+.highlight .mo,
+.highlight .il {
+  color: #ab9df2;
+}
+
+.highlight .gh {
+  color: #fcfcfa;
+  font-weight: 600;
+}
+
+.highlight .gu {
+  color: #727072;
+}
+
+.highlight .gd {
+  color: #ff6188;
+}
+
+.highlight .gi {
+  color: #a9dc76;
+}
+
+.highlight .ge {
+  font-style: italic;
+}
+
+.highlight .gs {
+  font-weight: 700;
+}
+
+.highlight .w {
+  color: #727072;
+}

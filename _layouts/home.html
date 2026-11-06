@@ -1,0 +1,10 @@
+---
+layout: default
+---
+<h1 class="mb-4 text-3xl font-semibold tracking-tight">{{ page.title | default: site.title }}</h1>
+{%- for post in paginator.posts %}
+  {%- include post-preview.html %}
+{%- else %}
+<p class="opacity-60">No hay publicaciones todavía.</p>
+{%- endfor %}
+{%- include pagination.html %}
