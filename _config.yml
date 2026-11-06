@@ -39,6 +39,14 @@ plugins:
 paginate: 5
 paginate_path: "/page:num/"
 
+# Las entradas usan el layout "post" sin necesidad de declararlo en cada archivo
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
 # Exclude from processing.
 exclude:
   - node_modules

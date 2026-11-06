@@ -1,7 +1,8 @@
 ---
-layout: post
 title: "Post de ejemplo"
 date: 2026-11-05 18:40:45 -0600
+tags: [jekyll, tailwind]
+author: Tu nombre
 categories: ejemplo
 ---
 

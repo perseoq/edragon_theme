@@ -33,6 +33,14 @@ plugins:
 # Paginación de la portada
 paginate: 5
 paginate_path: "/page:num/"
+
+# Las entradas usan el layout "post" automáticamente
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
 ```
 
 No copies el `_config.yml` de este repositorio: en un tema remoto el que manda es
@@ -82,12 +90,30 @@ title: Inicio
 `layout: home` es obligatorio en la portada: es el layout que muestra la lista de
 posts y la paginación.
 
-### 4. Contenido
+### 4. Plugin para nombres de archivo libres
+
+Para que cualquier archivo de `_posts/` sea una entrada (por ejemplo
+`_posts/un perrito-sordo.md`), copia el plugin en tu repositorio:
+
+```bash
+mkdir -p _plugins
+curl -fsSL https://raw.githubusercontent.com/perseoq/edragon_theme/main/_plugins/flexible_posts.rb \
+  -o _plugins/flexible_posts.rb
+```
+
+Sin este plugin, Jekyll solo lee archivos con el formato
+`AAAA-MM-DD-titulo.md`.
+
+> Los plugins personalizados se ejecutan con GitHub Actions o en local. El build
+> clásico de Pages (*Deploy from a branch*) no carga `_plugins/`, así que en ese
+> modo necesitas usar el nombre con fecha.
+
+### 5. Contenido
 
 Crea solo lo que necesites:
 
 ```
-_posts/2026-11-10-mi-entrada.md   # entradas del blog
+_posts/un perrito-sordo.md       # cualquier nombre; manda el front matter
 pages/sobre-mi.md                # páginas (aparecen en la barra lateral)
 nav/menu.md                      # menú superior (opcional)
 assets/                          # tus propios CSS/JS/imágenes (opcional)
@@ -106,19 +132,24 @@ title: Menú
 
 Los enlaces que empiezan por `/` reciben el `baseurl` automáticamente.
 
-Un post mínimo en `_posts/2026-11-10-mi-entrada.md`:
+Una entrada mínima en `_posts/un perrito-sordo.md`:
 
 ```markdown
 ---
-layout: post
-title: "Mi entrada"
+title: "Un perrito sordo"
 date: 2026-11-10 10:00:00 -0600
+tags: [perros, historias]
+author: Tu nombre        # opcional
 ---
 
 Contenido en Markdown.
 ```
 
-### 5. Publicar
+`title` y `date` identifican la entrada; `tags` y `author` son opcionales y se
+muestran en la cabecera del post. No hace falta `layout: post`: lo aplica el
+bloque `defaults` de `_config.yml`.
+
+### 6. Publicar
 
 #### Opción A: GitHub Actions (recomendado)
 
@@ -188,6 +219,10 @@ En **Settings → Pages → Source** elige **Deploy from a branch**, la rama `ma
 la carpeta `/ (root)`. GitHub Pages compila Jekyll y soporta `remote_theme`
 (además `jekyll-feed` y `jekyll-paginate` vienen incluidos).
 
+> Este modo no ejecuta `_plugins/`, así que los archivos de `_posts/` deben usar
+> el formato `AAAA-MM-DD-titulo.md`. Para nombres de archivo libres usa GitHub
+> Actions.
+
 En este caso configura el `baseurl` a mano en `_config.yml`:
 
 ```yaml
@@ -209,6 +244,8 @@ baseurl: ""
   Node.js ni ejecutar npm.
 - Puedes sobrescribir cualquier archivo del tema creando uno con la misma ruta en
   tu repo. Por ejemplo, `_layouts/post.html` o `_includes/footer.html`.
+- `remote_theme` **no** copia `_plugins/`: para aceptar nombres de archivo libres
+  tienes que añadir `_plugins/flexible_posts.rb` a tu repositorio (ver paso 4).
 - `jekyll-feed` es obligatorio: el layout usa `{% raw %}{% feed_meta %}{% endraw %}`.
   `jekyll-paginate` es opcional, pero sin él no habrá páginas `/page2/`.
 
@@ -251,7 +288,9 @@ Si quieres modificar el tema (layouts, Tailwind, etc.), copia todo el sitio:
 3. El workflow incluido compila Tailwind y Jekyll automáticamente.
 
 En este modo el repositorio es tuyo: puedes cambiar `_layouts/`, `_includes/`,
-`src/tailwind.css`, etc. No recibes actualizaciones automáticas del tema original.
+`src/tailwind.css`, etc. Incluye `_plugins/flexible_posts.rb`, así que acepta
+nombres de archivo libres en `_posts/` desde el primer momento. No recibes
+actualizaciones automáticas del tema original.
 
 ## Desarrollo local del tema
 
@@ -285,7 +324,9 @@ npm run build       # compila CSS + sitio Jekyll en _site/
 ├── _config.yml            # Configuración del sitio de demostración
 ├── _layouts/              # default, home, page y post
 ├── _includes/             # head, header, footer, sidebar, paginación, preview
-├── _posts/                # Entradas de ejemplo
+├── _posts/                # Entradas de ejemplo (cualquier nombre de archivo)
+├── _plugins/
+│   └── flexible_posts.rb  # Acepta nombres de archivo libres en _posts/
 ├── pages/                 # Páginas de ejemplo (barra lateral)
 ├── nav/menu.md            # Menú superior (lista Markdown)
 ├── assets/
@@ -301,18 +342,25 @@ npm run build       # compila CSS + sitio Jekyll en _site/
 
 ### Una entrada
 
-Crea `_posts/2026-11-10-mi-entrada.md`:
+Crea cualquier archivo dentro de `_posts/`, por ejemplo
+`_posts/un perrito-sordo.md`:
 
 ```markdown
 ---
-layout: post
-title: "Mi entrada"
+title: "Un perrito sordo"
 date: 2026-11-10 10:00:00 -0600
-categories: notas
+tags: [perros, historias]
+author: Tu nombre        # opcional
+categories: notas        # opcional
 ---
 
 Contenido en Markdown.
 ```
+
+No necesitas el prefijo `AAAA-MM-DD-` ni `layout: post`: el plugin lee cualquier
+nombre de archivo y el bloque `defaults` aplica el layout. `title` y `date` son
+los campos que identifican la entrada; `tags` y `author` son opcionales y se
+muestran en la cabecera.
 
 ### Una página
 
