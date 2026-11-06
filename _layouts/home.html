@@ -2,7 +2,15 @@
 layout: default
 ---
 <h1 class="mb-4 text-3xl font-semibold tracking-tight">{{ page.title | default: site.title }}</h1>
-{%- for post in paginator.posts %}
+{%- comment -%}
+  Si el sitio consumidor no usa jekyll-paginate, mostramos todos los posts.
+{%- endcomment -%}
+{%- if paginator %}
+  {%- assign posts = paginator.posts %}
+{%- else %}
+  {%- assign posts = site.posts %}
+{%- endif %}
+{%- for post in posts %}
   {%- include post-preview.html %}
 {%- else %}
 <p class="opacity-60">No hay publicaciones todavía.</p>

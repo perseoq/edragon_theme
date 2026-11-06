@@ -1,4 +1,4 @@
-{%- if paginator.total_pages > 1 %}
+{%- if paginator and paginator.total_pages > 1 %}
 <nav class="mt-10 flex items-center justify-between text-sm" aria-label="Paginación">
   <div>
     {%- if paginator.previous_page %}

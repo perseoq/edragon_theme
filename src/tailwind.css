@@ -9,6 +9,7 @@
 @source "../pages/**/*.{html,md,markdown}";
 @source "../nav/**/*.{html,md,markdown}";
 @source "../*.{html,md,markdown}";
+@source not "../README.md";
 
 /* Dark mode por clase .dark en <html>, no por preferencia del sistema */
 @custom-variant dark (&:where(.dark, .dark *));
