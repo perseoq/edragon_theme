@@ -6,34 +6,105 @@ y resaltado de sintaxis con el tema Monokai Pro.
 
 ## Cómo usar esta plantilla
 
-1. Pulsa **Use this template → Create a new repository** en GitHub.
-   También puedes usar la CLI:
+La plantilla sirve para los dos tipos de sitio de GitHub Pages:
 
-   ```bash
-   gh repo create mi-blog --template perseoq/edragon_theme --public
-   ```
+| Tipo de sitio | Nombre del repositorio | URL publicada |
+| --- | --- | --- |
+| Usuario u organización | `usuario.github.io` | `https://usuario.github.io/` |
+| Proyecto | cualquier nombre, por ejemplo `mi-blog` | `https://usuario.github.io/mi-blog/` |
 
-2. Clona tu repo nuevo:
+No hace falta configurar `baseurl` a mano: el workflow lo calcula según el tipo
+de repositorio.
+
+### Crear un repositorio nuevo desde la plantilla
+
+1. Entra en <https://github.com/perseoq/edragon_theme> y pulsa
+   **Use this template → Create a new repository**.
+2. Elige el propietario y el nombre:
+   - **Sitio de usuario u organización**: el nombre debe ser exactamente
+     `TU-USUARIO.github.io` (o `TU-ORG.github.io`).
+   - **Sitio de proyecto**: cualquier nombre, por ejemplo `mi-blog`.
+3. Marca el repositorio como **Public** (Pages en el plan gratuito requiere un
+   repo público) y pulsa **Create repository**.
+
+Con la CLI de GitHub también puedes crearlo:
+
+```bash
+# Sitio de proyecto
+gh repo create mi-blog --template perseoq/edragon_theme --public
+
+# Sitio de usuario (sustituye TU-USUARIO)
+gh repo create TU-USUARIO.github.io --template perseoq/edragon_theme --public
+```
+
+4. Clona tu repo nuevo y entra en él:
 
    ```bash
    git clone https://github.com/TU-USUARIO/mi-blog.git
    cd mi-blog
    ```
 
-3. Edita `_config.yml` con tus datos (`title`, `description`, `email`, `lang`).
-
-4. En GitHub ve a **Settings → Pages → Build and deployment → Source** y elige
+5. Edita `_config.yml` con tus datos (`title`, `description`, `email`, `lang`).
+6. En GitHub ve a **Settings → Pages → Build and deployment → Source** y elige
    **GitHub Actions**.
+7. Haz push a `main`:
 
-5. Haz push a `main`. El workflow
+   ```bash
+   git add -A
+   git commit -m "Personaliza el blog"
+   git push origin main
+   ```
+
+8. Revisa la pestaña **Actions**. El workflow
    [`.github/workflows/pages.yml`](.github/workflows/pages.yml) compila Tailwind y
-   Jekyll y publica el sitio.
+   Jekyll y publica el sitio. Al terminar, la URL aparece en
+   **Settings → Pages** y en el resumen del job de deploy.
 
    > Si es tu primer workflow, GitHub puede pedirte que confirmes la ejecución de
    > Actions. Revisa la pestaña **Actions** del repo.
 
-6. Abre `https://TU-USUARIO.github.io/mi-blog/` (o
-   `https://TU-USUARIO.github.io/` si el repo se llama `TU-USUARIO.github.io`).
+9. Abre tu sitio:
+   - Sitio de usuario: `https://TU-USUARIO.github.io/`
+   - Sitio de proyecto: `https://TU-USUARIO.github.io/mi-blog/`
+
+> Si tu repositorio existente usa `master` en vez de `main`, renómbralo en
+> **Settings → Branches** o cambia `branches: [main]` en el workflow.
+
+### Aplicar la plantilla a un repositorio que ya existe
+
+Si ya tienes un repositorio con contenido y quieres reutilizar el tema, puedes
+traer los archivos de la plantilla a una rama:
+
+```bash
+git remote add template https://github.com/perseoq/edragon_theme.git
+git fetch template
+git checkout -b aplicar-plantilla
+git merge --allow-unrelated-histories template/main
+```
+
+Resuelve los conflictos conservando tu contenido (`_posts/`, `pages/` y
+`_config.yml`) y quédate con los archivos del tema: `_layouts/`, `_includes/`,
+`assets/`, `src/`, `nav/`, `.github/workflows/pages.yml`, `package.json` y
+`Gemfile`.
+
+Si prefieres no hacer un merge de todo, trae solo los archivos del tema:
+
+```bash
+git checkout template/main -- _layouts _includes assets src nav .github
+```
+
+Después:
+
+1. Ajusta `package.json` y `Gemfile` si tu repo ya tenía los suyos (o copia los
+   de la plantilla).
+2. Copia de `_config.yml` las claves que necesita el tema: `plugins`,
+   `paginate`, `paginate_path` y `lang`.
+3. Activa Pages con origen **GitHub Actions**.
+4. Haz push y revisa la pestaña **Actions**.
+
+> La plantilla no se actualiza automáticamente en los repos que la copian. Para
+> traer mejoras futuras, repite `git fetch template` y haz merge o cherry-pick
+> sobre una rama, revisando los conflictos.
 
 ### Checklist después de crear el repo
 
