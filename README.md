@@ -1,8 +1,8 @@
 # Blog Jekyll + Tailwind CSS
 
 Tema de blog personal para **GitHub Pages**. Incluye Jekyll 4, Tailwind CSS 4,
-modo claro/oscuro, paginación, barra lateral automática, menú editable desde Markdown
-y resaltado de sintaxis con el tema Monokai Pro.
+modo claro/oscuro, paginación, barra lateral automática, menú editable desde Markdown,
+resaltado de sintaxis con el tema Monokai Pro y tablas con scroll horizontal en móvil.
 
 Se puede usar de dos formas:
 

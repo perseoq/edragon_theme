@@ -30,6 +30,12 @@ Un párrafo con **texto en negrita**, *cursiva* y un [enlace](https://jekyllrb.c
 
 > Una cita para comprobar el estilo del contenido.
 
+| Variable | Descripción |
+| --- | --- |
+| `RAILPACK_PHP_ROOT_DIR` | Document root de PHP |
+| `RAILPACK_STATIC_FILE_ROOT` | Directorio de archivos estáticos |
+| `RAILPACK_START_CMD` | Comando de inicio |
+
 ```ruby
 def saluda(nombre)
   puts "Hola, #{nombre}"
